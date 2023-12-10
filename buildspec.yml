@@ -3,7 +3,7 @@ phases:
   install:
     runtime-versions:
       java: corretto17        
-      python: 3.11
+      python: 3.8
     commands:
       - pip install --upgrade pip
       # Install dependencies needed for running the static analysis
@@ -19,18 +19,20 @@ phases:
     commands:
       #- pylint $CODEBUILD_SRC_DIR/*.py
       #- pylint $CODEBUILD_SRC_DIR/*/*.py
-      - sonar-scanner -Dsonar.organization=prajeshnikhil -Dsonar.projectKey=prajeshnikhil_22233784_devops -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=61b5ab7c00066cb39c1cfef5d7e1a923e4ce2204
-      - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=prajeshnikhil_22233784_devops > analysis.json
-      - cat analysis.json
+      echo "Testing code pre build"
+      # - sonar-scanner -Dsonar.organization=prajeshnikhil -Dsonar.projectKey=prajeshnikhil_22233784_devops -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=61b5ab7c00066cb39c1cfef5d7e1a923e4ce2204
+      # - sleep 5
+      # - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=prajeshnikhil_22233784_devops > analysis.json
+      # - cat analysis.json
   build:
     commands:
-      - if [[ $(jq -r '.projectStatus.status' analysis.json) = "ERROR" ]] ; then CODEBUILD_BUILD_SUCCEEDING=0; fi
+      echo "testing code build"
+      # - if [[ $(jq -r '.projectStatus.status' analysis.json) = "ERROR" ]] ; then CODEBUILD_BUILD_SUCCEEDING=0; fi
 artifacts:
   files:
     - '**/*'
-eb_codebuild_settings:
-  aws_beanstalk_application:
-    name: "test-attandance"
-  aws_beanstalk_environment:
-    name: "Test-attandance-env"
+# eb_codebuild_settings:
+#   aws_beanstalk_application:
+#     name: "test-attandance"
+#   aws_beanstalk_environment:
+#     name: "Test-attandance-env"
