@@ -20,7 +20,7 @@ phases:
       #- pylint $CODEBUILD_SRC_DIR/*.py
       #- pylint $CODEBUILD_SRC_DIR/*/*.py
       echo "Testing code pre build"
-      - sonar-scanner -Dsonar.organization=prajeshnikhil -Dsonar.projectKey=BaluThota2012_attandance-test -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=cc5737139aa079a6e7a1d13a825521707a182af2
+      - sonar-scanner -Dsonar.organization=prajeshnikhil -Dsonar.projectKey=BaluThota2012_attandance-test -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=cc5737139aa079a6e7a1d13a825521707a182af3
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=BaluThota2012_attandance-test > analysis.json
       - cat analysis.json
