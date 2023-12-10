@@ -26,7 +26,6 @@ phases:
       - cat project_status.json
   build:
     commands:
-      echo "testing code build"
       - if [[ $(jq -r '.projectStatus.status' project_status.json) = "ERROR" ]] ; then CODEBUILD_BUILD_SUCCEEDING=0; fi
 artifacts:
   files:
