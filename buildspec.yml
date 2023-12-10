@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto17      
+      java: corretto17        
       python: 3.11
     commands:
       - pip install --upgrade pip
@@ -20,14 +20,14 @@ phases:
       #- pylint $CODEBUILD_SRC_DIR/*.py
       #- pylint $CODEBUILD_SRC_DIR/*/*.py
       echo "Testing code pre build"
-      # - sonar-scanner -Dsonar.organization=prajeshnikhil -Dsonar.projectKey=prajeshnikhil_22233784_devops -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=61b5ab7c00066cb39c1cfef5d7e1a923e4ce2204
-      # - sleep 5
-      # - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=prajeshnikhil_22233784_devops > analysis.json
-      # - cat analysis.json
+      - sonar-scanner -Dsonar.organization=prajeshnikhil -Dsonar.projectKey=BaluThota2012_attandance-test -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=cc5737139aa079a6e7a1d13a825521707a182af2
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=BaluThota2012_attandance-test > analysis.json
+      - cat analysis.json
   build:
     commands:
       echo "testing code build"
-      # - if [[ $(jq -r '.projectStatus.status' analysis.json) = "ERROR" ]] ; then CODEBUILD_BUILD_SUCCEEDING=0; fi
+      - if [[ $(jq -r '.projectStatus.status' analysis.json) = "ERROR" ]] ; then CODEBUILD_BUILD_SUCCEEDING=0; fi
 artifacts:
   files:
     - '**/*'
